@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
@@ -14,25 +14,50 @@ namespace LocatorsHomework
     {
         public void ClickSearch()
         {
-            IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Url = "https://www.vesti.bg/";
+            driver.Manage().Window.Maximize();
+
+            IWebElement searchButton = null;
+            IWebElement searchButton1 = null;
+            IWebElement kristinaGaveBirth = null;
+            IWebElement textField = null;
+
             //Accept the GDPR
             System.Threading.Thread.Sleep(3000);
-            IWebElement acceptBtn = driver.FindElement(By.XPath("//div[@class='modal-wrapper cb-main-page'"));
 
+            try
+            {
+                searchButton = driver.FindElement(By.ClassName("search-button"));
+                Console.WriteLine(searchButton.Text);
+                searchButton1 = driver.FindElement(By.CssSelector(".search-button"));
+                Console.WriteLine(searchButton.Text);
+                
+            }
+            catch (NoSuchElementException)
+            {
+                Console.WriteLine("da mu se neznae");
 
-            acceptBtn.SendKeys(Keys.Space);
-            acceptBtn.SendKeys(Keys.Space);
-            acceptBtn.SendKeys(Keys.Space);
-            acceptBtn.SendKeys(Keys.Space);
+            }
 
+            searchButton1.SendKeys(Keys.Enter);
+            System.Threading.Thread.Sleep(700);
 
+            textField = driver.FindElement(By.Name("q"));
+            textField.SendKeys("Ралица");
+            searchButton1.SendKeys(Keys.Enter);
 
-            acceptBtn.Click();
+            System.Threading.Thread.Sleep(5000);
+            kristinaGaveBirth = driver.FindElement(By.XPath("//div[@class='content-left']//a[@href='https://www.vesti.bg/lyubopitno/aktrisata-ralica-paskaleva-stana-majka-6084181']//h3"));
 
+            Console.WriteLine(kristinaGaveBirth.Text); 
 
             Console.ReadLine();
-           // searchBtn.Clear();
+            // searchBtn.Clear();
+
+
+            driver.Quit();
+
         }
     }
 }
