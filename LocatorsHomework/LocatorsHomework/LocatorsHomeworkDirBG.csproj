@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SaerchValidateAndDoDirBG.cs" />
     <Compile Include="VestiBgSearch.cs" />
     <Compile Include="Wheather.cs" />
     <Compile Include="Demo.cs" />

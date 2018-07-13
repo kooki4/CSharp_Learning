@@ -16,9 +16,8 @@ namespace LocatorsHomework
             // var vremeto = new Wheather();
             // vremeto.getCurrentWheather();
 
-            var VestiBgSearch = new VestiBgSearch();
-            VestiBgSearch.ClickSearch();
-
+            var VestiBgSearch = new SaerchValidateAndDoDirBG();
+            VestiBgSearch.validateSearch();
         }
     }
 }

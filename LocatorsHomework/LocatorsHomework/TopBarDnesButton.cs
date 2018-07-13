@@ -10,7 +10,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace LocatorsHomework
 {
-    class TopBarDnesButton
+    public class TopBarDnesButton
     {
         private void run()
         {
