@@ -17,9 +17,10 @@ namespace BedeAutomationTask
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("LibraryTest", Description="\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-        "f two numbers", SourceFile="LibraryTest.feature", SourceLine=0)]
-    public partial class LibraryTestFeature
+    [TechTalk.SpecRun.FeatureAttribute("Project Library Manager", Description="      In order to perform CRUD operations on the library\r\n      As a Library Mana" +
+        "ger\r\n      I want to be able to Create, Update, Delete, and List library content" +
+        "", SourceFile="LibraryTest.feature", SourceLine=0)]
+    public partial class ProjectLibraryManagerFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,8 +32,9 @@ namespace BedeAutomationTask
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "LibraryTest", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Project Library Manager", "      In order to perform CRUD operations on the library\r\n      As a Library Mana" +
+                    "ger\r\n      I want to be able to Create, Update, Delete, and List library content" +
+                    "", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -63,22 +65,38 @@ namespace BedeAutomationTask
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Add two numbers", new string[] {
-                "mytag"}, SourceLine=7)]
-        public virtual void AddTwoNumbers()
+        [TechTalk.SpecRun.ScenarioAttribute("Add a new book to the library and verify it.", SourceLine=5)]
+        public virtual void AddANewBookToTheLibraryAndVerifyIt_()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
-                        "mytag"});
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 9
-       testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
-       testRunner.And("I have also entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
-       testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
-       testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new book to the library and verify it.", ((string[])(null)));
+#line 6
+  this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Value"});
+            table1.AddRow(new string[] {
+                        "id",
+                        "1"});
+            table1.AddRow(new string[] {
+                        "Title",
+                        "Test"});
+            table1.AddRow(new string[] {
+                        "Description",
+                        "Test Description"});
+            table1.AddRow(new string[] {
+                        "Author",
+                        "Test Author 1"});
+#line 7
+      testRunner.Given("the following book data", ((string)(null)), table1, "Given ");
+#line 13
+      testRunner.When("the library manager posts the book data to the website", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
+      testRunner.Then("a positive status should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 15
+      testRunner.When("the library manager gets the project by id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+      testRunner.Then("the saved book data matches the posted one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

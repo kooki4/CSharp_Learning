@@ -1,12 +1,16 @@
-﻿Feature: LibraryTest
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+﻿Feature: Project Library Manager
+      In order to perform CRUD operations on the library
+      As a Library Manager
+      I want to be able to Create, Update, Delete, and List library content
 
-@mytag
-
-Scenario: Add two numbers
-       Given I have entered 50 into the calculator
-       And I have also entered 70 into the calculator
-       When I press add
-       Then the result should be 120 on the screen
+  Scenario: Add a new book to the library and verify it.
+      Given the following book data
+          | Field       | Value            |
+          | id          | 1                |
+          | Title       | Test             |
+          | Description | Test Description |
+          | Author      | Test Author 1    |
+      When the library manager posts the book data to the website
+      Then a positive status should be returned
+      When the library manager gets the project by id
+      Then the saved book data matches the posted one
