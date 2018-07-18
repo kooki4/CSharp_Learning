@@ -10,7 +10,7 @@ namespace InharitanceEqualToLecture5HM
     {
         public string name { get; set; }
         public int age { get; set; }
-        public bool isMan { get { return true; } set { } }
+        public bool isMan { get; set; }
 
         public Person(string name, int age, bool isMan)
         {
@@ -21,7 +21,7 @@ namespace InharitanceEqualToLecture5HM
 
         public void showPerson()
         {
-            Console.WriteLine(this.name + " " + this.age + " " + this.isMan);
+            Console.WriteLine("Person info: " + this.name + " " + this.age + " " + this.isMan);
         }
 
     }
