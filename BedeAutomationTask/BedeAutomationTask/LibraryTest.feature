@@ -14,3 +14,22 @@
       Then a positive status should be returned
       When the library manager gets the project by id
       Then the saved book data matches the posted one
+
+
+
+	  Hint for endpoint class:
+	  Folder TestData
+
+
+namespace Experian.Qas.Updates.Metadata.WebApi.TestData
+{
+  public static class Endpoints
+  {
+    public const string FileDownloadEndPointV1 = @"/metadata/V1/filedownload";
+    public const string PackagesEndPointV1 = @"/metadata/V1/packages";
+
+    public const string FileDownloadEndPointV2 = @"/metadata/V2/filelink";
+    public const string PackagesEndPointV2 = @"/metadata/V2/packages";
+    public const string TokenV2 = @"/metadata/V2/token";
+  }
+}
