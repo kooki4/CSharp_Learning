@@ -13,11 +13,12 @@ namespace LocatorsHomework
     {
         static void Main(string[] args)
         {
-            //  var vremeto = new Wheather();
-            //  vremeto.getCurrentWheather();
+            // var vremeto = new Wheather();
+            // vremeto.getCurrentWheather();
 
-            VestiBgSearch vestiSearch = new VestiBgSearch();
-            vestiSearch.ClickSearch();
+            var VestiBgSearch = new VestiBgSearch();
+            VestiBgSearch.ClickSearch();
+
         }
     }
 }

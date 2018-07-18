@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
 namespace LocatorsHomework
 {
     class Wheather
     {
-
+        public IWebDriver driver { get; set; }
         public void getCurrentWheather()
         {
             /* 
             Goes go dir.bg, click on small wheather button, gets the current temperture and location and prints inside the console.
             */
-
-
-            IWebDriver driver = new ChromeDriver();
-            driver.Url = "https://www.dir.bg/";
-            Console.OutputEncoding = Encoding.UTF8;
+            this.driver = new FirefoxDriver();
+            driver.Url = "https://dir.bg/";
 
             //Accept GDPR
             IWebElement agreeBtn = driver.FindElement(By.ClassName("button_text"));
@@ -42,7 +37,7 @@ namespace LocatorsHomework
 
             IWebElement currentLocation = driver.FindElement(By.XPath("//div[@class='weather-location']//h2"));
 
-            Console.WriteLine($"At {currentTime.Text} the temperture is { gradusi.Text } at { currentLocation.Text } city.");
+            Console.WriteLine($"{currentTime.Text} температурата е { gradusi.Text } в { currentLocation.Text }.");
 
             Console.ReadLine();
 
