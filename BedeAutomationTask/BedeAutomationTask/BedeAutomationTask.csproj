@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Bede\Automation QA Task - Implement API tests.pdf" />
+    <None Include="Bede\LibraryManager.exe.config" />
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -105,6 +107,9 @@
     </None>
     <None Include="packages.config" />
     <None Include="runtests.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bede\LibraryManager.exe" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
