@@ -83,15 +83,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Calculator.cs" />
-    <Compile Include="LibraryTest.feature.cs">
+    <Compile Include="Features\LibraryTest.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryTest.feature</DependentUpon>
     </Compile>
     <Compile Include="LibraryTestModel.cs" />
-    <Compile Include="ProjectLibraryManagerSteps.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +96,7 @@
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LibraryTest.feature">
+    <None Include="Features\LibraryTest.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>LibraryTest.feature.cs</LastGenOutput>
     </None>
