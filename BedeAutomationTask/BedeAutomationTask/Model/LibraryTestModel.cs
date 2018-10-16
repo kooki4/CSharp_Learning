@@ -1,6 +1,6 @@
 ﻿namespace BedeAutomationTask
 {
-    public class LibraryModel
+    public class Model
     {
         public int Id { get; set; }
         public string Author { get; set; }
