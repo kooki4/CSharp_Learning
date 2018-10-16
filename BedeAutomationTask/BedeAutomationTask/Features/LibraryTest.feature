@@ -3,9 +3,10 @@
       As a Library Manager
       I want to be able to Add, Update, Delete, and View Library content
 
-Scenario: Add new book to the library and verify status.
+Scenario Outline: Add new book to the library and verify status.
 	Given I add a new book with <Id>, <Title>, <Description> and <Author>
 	Then positive <Status> is returned
+
 Examples:
 	| Id | Title          | Description        | Author   | Status |
 	| 1  | Test1          | Description 1      | A.1      | 200    |
