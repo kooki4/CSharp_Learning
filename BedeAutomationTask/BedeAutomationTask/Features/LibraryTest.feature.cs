@@ -1,37 +1,14 @@
-﻿#error Generation error: Message: Object reference not set to an instance of an object.
-
-AppDomain Information: 
-	Name: AppDomainForTestGeneration
-	ConfigFile: C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\plugincompability.config
-	BaseDirectory: C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools
-
-Loaded Assemblies:
-Fullname | Location | Codebase
-CommandLine, Version=2.3.0.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32 | C:\Users\C15108A\AppData\Local\Microsoft\VisualStudio\15.0_53d63877\Extensions\xy0sdud2.zu3\CommandLine.dll | file:///C:/Users/C15108A/AppData/Local/Microsoft/VisualStudio/15.0_53d63877/Extensions/xy0sdud2.zu3/CommandLine.DLL
-Gherkin, Version=5.0.0.0, Culture=neutral, PublicKeyToken=86496cfa5b4a5851 | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\Gherkin.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/Gherkin.DLL
-mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll | file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
-Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\Newtonsoft.Json.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/Newtonsoft.Json.DLL
-SpecRun.SpecFlowPlugin, Version=1.8.0.0, Culture=neutral, PublicKeyToken=null | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecRun.SpecFlow.2-3-0.1.8.5\lib\net45\SpecRun.SpecFlowPlugin.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecRun.SpecFlow.2-3-0.1.8.5/lib/net45/SpecRun.SpecFlowPlugin.dll
-System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
-System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
-System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
-System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_32/System.Data/v4.0_4.0.0.0__b77a5c561934e089/System.Data.dll
-System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Numerics\v4.0_4.0.0.0__b77a5c561934e089\System.Numerics.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Numerics/v4.0_4.0.0.0__b77a5c561934e089/System.Numerics.dll
-System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Serialization.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Runtime.Serialization/v4.0_4.0.0.0__b77a5c561934e089/System.Runtime.Serialization.dll
-System.ValueTuple, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.ValueTuple\v4.0_4.0.0.0__cc7b13ffcd2ddd51\System.ValueTuple.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.ValueTuple/v4.0_4.0.0.0__cc7b13ffcd2ddd51/System.ValueTuple.dll
-System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
-System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml.Linq\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.Linq.dll | file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml.Linq/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.Linq.dll
-TechTalk.SpecFlow, Version=2.3.2.0, Culture=neutral, PublicKeyToken=0778194805d6db41 | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\TechTalk.SpecFlow.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/TechTalk.SpecFlow.DLL
-TechTalk.SpecFlow.Generator, Version=2.3.2.0, Culture=neutral, PublicKeyToken=0778194805d6db41 | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\TechTalk.SpecFlow.Generator.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/TechTalk.SpecFlow.Generator.DLL
-TechTalk.SpecFlow.Parser, Version=2.3.2.0, Culture=neutral, PublicKeyToken=0778194805d6db41 | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\TechTalk.SpecFlow.Parser.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/TechTalk.SpecFlow.Parser.DLL
-TechTalk.SpecFlow.Reporting, Version=2.3.2.0, Culture=neutral, PublicKeyToken=0778194805d6db41 | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\TechTalk.SpecFlow.Reporting.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/TechTalk.SpecFlow.Reporting.DLL
-TechTalk.SpecFlow.Utils, Version=2.3.2.0, Culture=neutral, PublicKeyToken=0778194805d6db41 | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecFlow.2.3.2\tools\TechTalk.SpecFlow.Utils.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecFlow.2.3.2/tools/TechTalk.SpecFlow.Utils.DLL
-TechTalk.SpecFlow.VisualStudio.CodeBehindGenerator, Version=2017.2.7.0, Culture=neutral, PublicKeyToken=0778194805d6db41 | C:\Users\C15108A\AppData\Local\Microsoft\VisualStudio\15.0_53d63877\Extensions\xy0sdud2.zu3\TechTalk.SpecFlow.VisualStudio.CodeBehindGenerator.exe | file:///C:/Users/C15108A/AppData/Local/Microsoft/VisualStudio/15.0_53d63877/Extensions/xy0sdud2.zu3/TechTalk.SpecFlow.VisualStudio.CodeBehindGenerator.exe
-TechTalk.SpecRun.Common, Version=1.8.0.0, Culture=neutral, PublicKeyToken=d0fc5cc18b3b389b | C:\Users\C15108A\Source\Repos\CSharp_Learning\BedeAutomationTask\packages\SpecRun.SpecFlow.2-3-0.1.8.5\lib\net45\TechTalk.SpecRun.Common.dll | file:///C:/Users/C15108A/Source/Repos/CSharp_Learning/BedeAutomationTask/packages/SpecRun.SpecFlow.2-3-0.1.8.5/lib/net45/TechTalk.SpecRun.Common.DLL
-
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at TechTalk.SpecFlow.Generator.UnitTestFeatureGenerator.GenerateUnitTestFixture(SpecFlowDocument document, String testClassName, String targetNamespace)
-   at TechTalk.SpecFlow.Generator.TestGenerator.GenerateTestFileCode(FeatureFileInput featureFileInput)
-   at TechTalk.SpecFlow.Generator.TestGenerator.GetGeneratedTestCode(FeatureFileInput featureFileInput)
-   at TechTalk.SpecFlow.Generator.TestGenerator.GenerateTestFileWithExceptions(FeatureFileInput featureFileInput, GenerationSettings settings)
-   at TechTalk.SpecFlow.Generator.ErrorHandlingTestGenerator.GenerateTestFile(FeatureFileInput featureFileInput, GenerationSettings settings)
+﻿#error Unable to find plugin in the plugin search path: SpecRun. Please check http://go.specflow.org/doc-plugins for details.
+#error TechTalk.SpecFlow.Generator
+#error    at TechTalk.SpecFlow.Generator.Plugins.GeneratorPluginLoader.LoadPlugin(PluginDescriptor pluginDescriptor)
+#error    at TechTalk.SpecFlow.Generator.GeneratorContainerBuilder.<>c__DisplayClass3.<LoadPlugins>b__1(PluginDescriptor pd)
+#error    at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+#error    at System.Linq.Enumerable.<ConcatIterator>d__59`1.MoveNext()
+#error    at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+#error    at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+#error    at TechTalk.SpecFlow.Generator.GeneratorContainerBuilder.LoadPlugins(ObjectContainer container, IGeneratorConfigurationProvider configurationProvider, SpecFlowConfigurationHolder configurationHolder)
+#error    at TechTalk.SpecFlow.Generator.GeneratorContainerBuilder.CreateContainer(SpecFlowConfigurationHolder configurationHolder, ProjectSettings projectSettings)
+#error    at TechTalk.SpecFlow.Generator.TestGeneratorFactory.CreateGenerator(ProjectSettings projectSettings)
+#error    at TechTalk.SpecFlow.IdeIntegration.Generator.GeneratorServices.CreateTestGenerator()
+#error    at TechTalk.SpecFlow.IdeIntegration.Generator.IdeSingleFileGenerator.GenerateCode(String inputFilePath, String inputFileContent, GeneratorServices generatorServices, ProjectSettings projectSettings)
+#error    at TechTalk.SpecFlow.IdeIntegration.Generator.IdeSingleFileGenerator.Generate(String inputFilePath, String inputFileContent, GeneratorServices generatorServices, CodeDomHelper codeDomHelper, ProjectSettings projectSettings)
