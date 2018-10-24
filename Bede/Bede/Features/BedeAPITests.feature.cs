@@ -71,13 +71,13 @@ namespace Bede.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create books to the library")]
+        [NUnit.Framework.DescriptionAttribute("Add book to the library")]
         [NUnit.Framework.CategoryAttribute("mytag")]
         [NUnit.Framework.TestCaseAttribute("1", "A.1", "Test1", "Description 1", "200", null)]
         [NUnit.Framework.TestCaseAttribute("2", "Author 2", "Test2", "Desciption\'s bla 2", "200", null)]
         [NUnit.Framework.TestCaseAttribute("3", "Author 3", "Title3", "Desciprtion aha 3", "200", null)]
         [NUnit.Framework.TestCaseAttribute("4", "Author 4", "Title4Author 1", "Description 4", "200", null)]
-        public virtual void CreateBooksToTheLibrary(string id, string author, string title, string description, string status, string[] exampleTags)
+        public virtual void AddBookToTheLibrary(string id, string author, string title, string description, string status, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -85,16 +85,14 @@ namespace Bede.Features
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create books to the library", null, @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add book to the library", null, @__tags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
- testRunner.Given(string.Format("I create a new book with parameters: {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I create a new book with parameter: {0},{1},{2},{3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-    testRunner.And("ModelState is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
- testRunner.Then(string.Format("a positive {0} is returned", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("a {0} is returned", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

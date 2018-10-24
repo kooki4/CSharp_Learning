@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Steps\BedeAPITestsSteps.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Features\BedeAPITests.feature.cs">
       <AutoGen>True</AutoGen>
@@ -81,9 +82,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Steps\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>

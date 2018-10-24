@@ -4,10 +4,9 @@
 	I want to be told the sum of two numbers
 
 @mytag
-Scenario Outline: Create books to the library
-	Given I create a new book with parameters: <Id>, <Author>, <Title> and <Description>
-    And ModelState is correct
-	Then a positive <Status> is returned
+Scenario Outline: Add book to the library
+	Given I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
+	Then a <Status> is returned
 
 Examples:
 	| Id | Author   |  Title          | Description        | Status |

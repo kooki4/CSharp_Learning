@@ -35,7 +35,7 @@ namespace Bede.Requests
         public HttpRequestWrapper AddJsonContent(object data)
         {
             _restRequest.RequestFormat = DataFormat.Json;
-            _restRequest.AddHeader("Content type", "application/json");
+            _restRequest.AddHeader("Content-Type", "application/json");
             _restRequest.AddBody(data);
             return this;
         }
@@ -51,6 +51,19 @@ namespace Bede.Requests
                 _restRequest.AddParameter(item.Key, item.Value);
             }
             return this;
+        }
+        public IRestResponse Execute()
+        {
+            try
+            {
+                _restClient = new RestClient("http://localhost:9000/");
+                var response = _restClient.Execute(_restRequest);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
