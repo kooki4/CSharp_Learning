@@ -59,6 +59,7 @@ namespace Bede.Requests
                 _restClient = new RestClient("http://localhost:9000/");
                 var response = _restClient.Execute(_restRequest);
                 return response;
+
             }
             catch (Exception ex)
             {

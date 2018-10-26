@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
 using System.Net;
+using System;
+using System.Text.RegularExpressions;
 
 namespace Bede
 {
@@ -15,8 +17,14 @@ namespace Bede
         private IRestResponse _restResponse;
         private Book _book;
         private HttpStatusCode _statusCode;
-        private string[] _statusDesc = null;
-        private List<Book> _books;
+        private string _statusDesc;
+        private string str;
+        private string FormatMessage(string content)
+        {
+            Regex rgx = new Regex("[{-}-\\-\"]");
+            str = rgx.Replace(content, "");
+            return str;
+        }
 
         [Given(@"I create a new book with parameter: (.*),(.*),(.*),(.*)")]
         public void GivenICreateANewBookWithParameterA_TestDescription(int Id, string Author, string Title, string Description)
@@ -35,13 +43,13 @@ namespace Bede
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
             _statusCode = _restResponse.StatusCode;
-            _statusDesc = _restResponse.Content.Split();
+            _statusDesc = _restResponse.Content;
+            _statusDesc = FormatMessage(_statusDesc);
         }
         [Then(@"a (.*) is returned")]
         public void ThenAStatusIsReturned(HttpStatusCode status)
         {
-            var asd = typeof(_book);
-            string message = string.Format("{\"Message\":\"Book with id {0} already exists!\"}", _book.Id);
+            string message = string.Format("Message:Book with id {0} already exists!", _book.Id);
             Assert.AreEqual(message, _statusDesc);
         }
     }
