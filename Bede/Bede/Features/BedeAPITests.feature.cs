@@ -71,13 +71,16 @@ namespace Bede.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add book to the library")]
+        [NUnit.Framework.DescriptionAttribute("Create a new books")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        [NUnit.Framework.TestCaseAttribute("1", "A.1", "Test1", "Description 1", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("2", "Author 2", "Test2", "Desciption\'s bla 2", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("3", "Author 3", "Title3", "Desciprtion aha 3", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("4", "Author 4", "Title4Author 1", "Description 4", "200", null)]
-        public virtual void AddBookToTheLibrary(string id, string author, string title, string description, string status, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("1", "AuthorWithTwentyNineLettersss", "Test", "Test", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("2", "AuthorWithThirtyLetterssssssss", "Test", "Test", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("3", "AuthorWithThirtyOneLetterssssss", "Title", "Test", "400", null)]
+        [NUnit.Framework.TestCaseAttribute("4", "Author with blank spaces", "Title4Author 1", "Test", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("5", "Author .H Banks", "Title4Author 1", "Test", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("6", "AuthorWithSymbols%&^*!@#$", "Title4Author 1", "Description 4", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("7", "Author", "TitleWithTwentyNice", "", "", null)]
+        public virtual void CreateANewBooks(string id, string author, string title, string description, string status, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -85,14 +88,28 @@ namespace Bede.Features
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add book to the library", null, @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new books", null, @__tags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
  testRunner.Given(string.Format("I create a new book with parameter: {0},{1},{2},{3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.Then(string.Format("a {0} is returned", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("a proper add {0} and book details are correct", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete book from library")]
+        public virtual void DeleteBookFromLibrary()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete book from library", null, ((string[])(null)));
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 23
+ testRunner.Given("I delete a book with <id>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

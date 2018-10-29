@@ -17,7 +17,7 @@ namespace Bede
         private IRestResponse _restResponse;
         private Book _book;
         private HttpStatusCode _statusCode;
-        private string _statusDesc;
+        private string _statusContent;
         private string str;
         private string FormatMessage(string content)
         {
@@ -43,14 +43,35 @@ namespace Bede
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
             _statusCode = _restResponse.StatusCode;
-            _statusDesc = _restResponse.Content;
-            _statusDesc = FormatMessage(_statusDesc);
+            _statusContent = FormatMessage(_restResponse.Content);
         }
-        [Then(@"a (.*) is returned")]
+        [Then(@"a proper add (.*) and book details are correct")]
         public void ThenAStatusIsReturned(HttpStatusCode status)
         {
-            string message = string.Format("Message:Book with id {0} already exists!", _book.Id);
-            Assert.AreEqual(message, _statusDesc);
+            if(_statusCode.Equals(HttpStatusCode.OK)){
+                Assert.AreEqual($"Id: {_book.Id}, Title: {_book.Title}, Description: {_book.Description}, Author: {_book.Author}", _statusContent);
+            }
+            else
+            {
+                Assert.AreEqual("Message:Book.Author should not exceed 30 characters!\\r\\nParameter name: Book.Author", _statusContent);
+            }
+            //whever i try to add already existing library
+            //string message = string.Format("Message:Book with id {0} already exists!", _book.Id);
+            Assert.AreEqual(status, _statusCode);
+            //Assert.AreEqual(message, _statusContent);
         }
+
+        [Given(@"I delete a book with (.*)")]
+        public void GivenIDeleteABookWith(string id)
+        {
+            var request = new HttpRequestWrapper()
+                            .SetMethod(Method.DELETE)
+                            .SetResource("api/books").AddParameter("id", id);
+            _restResponse = new RestResponse();
+            _restResponse = request.Execute();
+            _statusCode = _restResponse.StatusCode;
+            _statusContent = FormatMessage(_restResponse.Content);
+        }
+
     }
 }
