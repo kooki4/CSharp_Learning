@@ -2,11 +2,12 @@
 	In order to avoid silly mistakes
 	As a math idiot
 	I want to be told the sum of two numbers
-
+# I may want to replace Given with When since When is the ACTION word
 @mytag
 Scenario Outline: Create a new books
 	Given I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
-	Then a proper add <Status> and correct book details are returned
+	Then a proper <Status> is received from system
+	And correct book details are returned from system
 
 Examples:
 	| Id | Author                          | Title                                                                                                | Description                                                                                                                                                                                                                                                      | Status      |
@@ -23,6 +24,26 @@ Examples:
 	| 11 | Author                          | TitleWithTwentyNice                                                                                  | Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description wit  | OK          |
 	| 12 | Author                          | TitleWithTwentyNice                                                                                  | Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with | OK          |
 
-Scenario: Delete book from library
+
+Scenario: Remove a book and get all books left
 	Given I delete a book with <id>
-	#Then a proper delete <Status> is returned
+	Then a proper <Status> is returned 
+	And correct library book details are returned
+
+Scenario: Remove already deleted book
+
+Scenario: Update the details of a book
+	When  I update a book with <id> with <Authro>
+	Then the book is correctly book updated
+	When I update the <
+
+Scenario: Get all books
+	Given I request all books from the librabry
+	Then I receive a full list of books 
+	And the details of each book
+
+
+Scenario: Get a book details
+	Given  I request a the details of a single book from the library
+	Then I receive the
+
