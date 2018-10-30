@@ -5,8 +5,8 @@
 # I may want to replace Given with When since When is the ACTION word
 @mytag
 Scenario Outline: Create a new books
-	Given I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
-	Then a proper <Status> is received from system
+	When I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
+	Then a proper <Status> is returned from system 
 	And correct book details are returned from system
 
 Examples:
@@ -15,7 +15,7 @@ Examples:
 	| 2  | AuthorWithThirtyLetterssssssss  | Title 2                                                                                              | Test                                                                                                                                                                                                                                                             | OK          |
 	| 3  | AuthorWithThirtyOneLetterssssss | Title 3                                                                                              | Test                                                                                                                                                                                                                                                             | Bad request |
 	| 4  | Author with blank spaces        | Title 4                                                                                              | Test                                                                                                                                                                                                                                                             | OK          |
-	| 5  | Author .H Banks                 | Title 5                                                                                              | Test                                                                                                                                                                                                                                                             | OK          |
+	| 5  | Author H. Writer                | Title 5                                                                                              | Test                                                                                                                                                                                                                                                             | OK          |
 	| 6  | A.Symbols} @!["#$%&'()*+,-./]   | Title 6                                                                                              | Description 4                                                                                                                                                                                                                                                    | OK          |
 	| 7  | Author                          | TitleWithNinetyNineCharactersAsASingleWorkTitleWithNinetyNineCharactersAsASingleWorkTitleWithNinety  |                                                                                                                                                                                                                                                                  | OK          |
 	| 8  | Author                          | TitleWithNinety Nine Characters Work Title With NinetyNine Characters WorkTitle WithNinetyCharacter  | Description 4                                                                                                                                                                                                                                                    | OK          |
@@ -24,11 +24,24 @@ Examples:
 	| 11 | Author                          | TitleWithTwentyNice                                                                                  | Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description wit  | OK          |
 	| 12 | Author                          | TitleWithTwentyNice                                                                                  | Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with | OK          |
 
+# Not fully implemented the second call returns an error  !!!
+Scenario Outline: Create the same book
+	When I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
+	Then system return a proper already exists <Status>
+Examples: 
+	| Id | Author | Title | Description | Status                                    |
+	| 13 | Author | Test  | Description | OK                                        |
+	| 14 | Author | Test  | Description | "Message:Book with id 14 already exists!" |
 
-Scenario: Remove a book and get all books left
-	Given I delete a book with <id>
-	Then a proper <Status> is returned 
-	And correct library book details are returned
+Scenario Outline: Remove a book and check the books left into the library
+	When I delete a book with <id>
+	Then a proper <Status> is returned from system
+	#And correct library book details are returned
+Examples: 
+	| id | Status    |
+	| 1  | Completed |
+
+
 
 Scenario: Remove already deleted book
 
