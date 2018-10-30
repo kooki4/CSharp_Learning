@@ -45,7 +45,7 @@ namespace Bede
             _statusCode = _restResponse.StatusCode;
             _statusContent = FormatMessage(_restResponse.Content);
         }
-        [Then(@"a proper add (.*) and book details are correct")]
+        [Then(@"a proper add (.*) and correct book details are returned")]
         public void ThenAStatusIsReturned(HttpStatusCode status)
         {
             if(_statusCode.Equals(HttpStatusCode.OK)){
