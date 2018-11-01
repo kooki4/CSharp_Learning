@@ -8,6 +8,8 @@ Scenario Outline: Create a new books
 	When I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
 	Then a proper <Status> is returned from system 
 	And correct book details are returned from system
+# ToDo
+#	And correct list of all available books
 
 Examples:
 	| Id | Author                          | Title                                                                                                | Description                                                                                                                                                                                                                                                      | Status      |
@@ -24,30 +26,35 @@ Examples:
 	| 11 | Author                          | TitleWithTwentyNice                                                                                  | Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description wit  | OK          |
 	| 12 | Author                          | TitleWithTwentyNice                                                                                  | Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with | OK          |
 
-Scenario Outline: Delete a book and check the books left into the library
+Scenario Outline: Delete a book and verify it cannot be accessed
 	When I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
 	When I delete the created book
-#	Then a proper <Status> is returned from system
+	Then a proper <Status> is returned from system
+	And I am not able to access it by <id>
 Examples: 
+	| Id | Author   | Title   | Description   | Status |
+	| 13 | Author13 | Title13 | Description13 |        |
+
+
+Scenario Outline: Update Author, Title and Description of a book
+	When I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
+	And I update the <Author> of a book with <id>
+	Then the new book details are coorect
+	And I update the <Title> of a book with <id>
+	Then the new book details are coorect
+	And I update the <Description> of a book with <id>
+	Then the new book details are coorect
+Examples: 
+	| Id | Author   | Title   | Description   | Status |
+	| 14 | Author13 | Title13 | Description13 |        |
+
+
+Scenario: Get all 
+	When I create a 10 books
 	| Id | Author   | Title   | Description   |
-	| 13 | Author13 | Title13 | Description13 |
-	| 14 | Author13 | Title13 | Description13 |
-
-
-Scenario: Remove already deleted book
-
-Scenario: Update the details of a book
-	When  I update a book with <id> with <Authro>
-	Then the book is correctly book updated
-	When I update the <
-
-Scenario: Get all books
-	Given I request all books from the librabry
-	Then I receive a full list of books 
+	| 15 | Author13 | Title13 | Description13 |
+	| 15 | Author13 | Title13 | Description13 |
+	| 15 | Author13 | Title13 | Description13 |
+	| 15 | Author13 | Title13 | Description13 |
+	Then I can receive a proper list of books by searching with <tearms>
 	And the details of each book
-
-
-Scenario: Get a book details
-	Given  I request a the details of a single book from the library
-	Then I receive the
-
