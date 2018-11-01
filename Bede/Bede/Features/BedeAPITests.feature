@@ -24,23 +24,14 @@ Examples:
 	| 11 | Author                          | TitleWithTwentyNice                                                                                  | Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description wit  | OK          |
 	| 12 | Author                          | TitleWithTwentyNice                                                                                  | Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with | OK          |
 
-# Not fully implemented the second call returns an error  !!!
-Scenario Outline: Create the same book
+Scenario Outline: Delete a book and check the books left into the library
 	When I create a new book with parameter: <Id>,<Author>,<Title>,<Description>
-	Then system return a proper already exists <Status>
+	When I delete the created book
+#	Then a proper <Status> is returned from system
 Examples: 
-	| Id | Author | Title | Description | Status                                    |
-	| 13 | Author | Test  | Description | OK                                        |
-	| 14 | Author | Test  | Description | "Message:Book with id 14 already exists!" |
-
-Scenario Outline: Remove a book and check the books left into the library
-	When I delete a book with <id>
-	Then a proper <Status> is returned from system
-	#And correct library book details are returned
-Examples: 
-	| id | Status    |
-	| 1  | Completed |
-
+	| Id | Author   | Title   | Description   |
+	| 13 | Author13 | Title13 | Description13 |
+	| 14 | Author13 | Title13 | Description13 |
 
 
 Scenario: Remove already deleted book

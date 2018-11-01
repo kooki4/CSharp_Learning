@@ -114,36 +114,19 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create the same book")]
-        [NUnit.Framework.TestCaseAttribute("13", "Author", "Test", "Description", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("14", "Author", "Test", "Description", "\"Message:Book with id 14 already exists!\"", null)]
-        public virtual void CreateTheSameBook(string id, string author, string title, string description, string status, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Delete a book and check the books left into the library")]
+        [NUnit.Framework.TestCaseAttribute("13", "Author13", "Title13", "Description13", null)]
+        [NUnit.Framework.TestCaseAttribute("14", "Author13", "Title13", "Description13", null)]
+        public virtual void DeleteABookAndCheckTheBooksLeftIntoTheLibrary(string id, string author, string title, string description, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create the same book", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a book and check the books left into the library", null, exampleTags);
+#line 27
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
 #line 28
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 29
  testRunner.When(string.Format("I create a new book with parameter: {0},{1},{2},{3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
- testRunner.Then(string.Format("system return a proper already exists {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Remove a book and check the books left into the library")]
-        [NUnit.Framework.TestCaseAttribute("1", "Completed", null)]
-        public virtual void RemoveABookAndCheckTheBooksLeftIntoTheLibrary(string id, string status, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove a book and check the books left into the library", null, exampleTags);
-#line 36
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 37
- testRunner.When(string.Format("I delete a book with {0}", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
- testRunner.Then(string.Format("a proper {0} is returned from system", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
+ testRunner.When("I delete the created book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -153,7 +136,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void RemoveAlreadyDeletedBook()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove already deleted book", null, ((string[])(null)));
-#line 46
+#line 37
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -165,14 +148,14 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void UpdateTheDetailsOfABook()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update the details of a book", null, ((string[])(null)));
-#line 48
+#line 39
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 49
+#line 40
  testRunner.When("I update a book with <id> with <Authro>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 50
+#line 41
  testRunner.Then("the book is correctly book updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 51
+#line 42
  testRunner.When("I update the <", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
@@ -183,14 +166,14 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void GetAllBooks()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all books", null, ((string[])(null)));
-#line 53
+#line 44
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 54
+#line 45
  testRunner.Given("I request all books from the librabry", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 46
  testRunner.Then("I receive a full list of books", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 56
+#line 47
  testRunner.And("the details of each book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -201,12 +184,12 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void GetABookDetails()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a book details", null, ((string[])(null)));
-#line 59
+#line 50
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 60
+#line 51
  testRunner.Given("I request a the details of a single book from the library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 52
  testRunner.Then("I receive the", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

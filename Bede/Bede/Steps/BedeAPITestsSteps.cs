@@ -45,42 +45,34 @@ namespace Bede
             _statusCode = _restResponse.StatusCode;
             _statusMessage = FormatMessage(_restResponse.Content);
         }
+
         [Then(@"a proper (.*) is returned from system")]
         [Then(@"correct book details are returned from system")]
         public void ThenAProperStatusIsReturned(HttpStatusCode status)
         {
             Assert.IsTrue(_statusCode.ToString().Equals("OK") || _statusCode.ToString().Equals("BadRequest"));
 
-            if (status.Equals(HttpStatusCode.OK))
+            if (status.Equals(_restResponse.StatusCode))
             {
                 Assert.AreEqual($"Id:{_book.Id},Title:{_book.Title},Description:{_book.Description},Author:{_book.Author}", _statusMessage);
             }
-            else if (status.Equals(_restResponse.ResponseStatus.ToString()))
+            else if (status.Equals(_restResponse.StatusCode))
             {
                 Assert.AreEqual("Message:Book.Author should not exceed 30 characters!\\r\\nParameter name: Book.Author", _statusMessage);
             }
-//else if (status.Equals(HttpStatusCode.C))
         }
 
-        [Then(@"system return a proper already exists (.*)")]
-        public void ThenSystemReturnAProperAlreadyExistsStatus(HttpStatusCode status)
+        [When(@"I delete the created book")]
+        public void GivenIDeleteABookWith()
         {
-            if (status.Equals(HttpStatusCode.BadRequest))
-            {
-                Assert.AreEqual(status, _statusMessage);
-            }
-        }
+            var si = ScenarioContext.Current.Values;
 
-        [When(@"I delete a book with (.*)")]
-        public void GivenIDeleteABookWith(string id)
-        {
+            // _book = ScenarioContext.Current.Get<Book>("");
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.DELETE)
-                            .SetResource("api/books").AddParameter("id", id);
+                            .SetResource("api/books").AddParameter("id", _book.Id);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-// _statusCode = _restResponse.StatusDescription;
-            _statusMessage = _restResponse.ResponseStatus.ToString();
         }
 
     }
