@@ -71,27 +71,23 @@ namespace Bede.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a new books")]
+        [NUnit.Framework.DescriptionAttribute("Create a new book")]
         [NUnit.Framework.CategoryAttribute("mytag")]
         [NUnit.Framework.TestCaseAttribute("1", "AuthorWithTwentyNineLettersss", "Title 1", "Test", "OK", null)]
         [NUnit.Framework.TestCaseAttribute("2", "AuthorWithThirtyLetterssssssss", "Title 2", "Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("3", "AuthorWithThirtyOneLetterssssss", "Title 3", "Test", "Bad request", null)]
+        [NUnit.Framework.TestCaseAttribute("3", "AuthorWithThirtyOneLetterssssss", "Title 3", "Test", "BadRequest", null)]
         [NUnit.Framework.TestCaseAttribute("4", "Author with blank spaces", "Title 4", "Test", "OK", null)]
         [NUnit.Framework.TestCaseAttribute("5", "Author H. Writer", "Title 5", "Test", "OK", null)]
         [NUnit.Framework.TestCaseAttribute("6", "A.Symbols} @![\"#$%&\'()*+,-./]", "Title 6", "Description 4", "OK", null)]
         [NUnit.Framework.TestCaseAttribute("7", "Author", "TitleWithNinetyNineCharactersAsASingleWorkTitleWithNinetyNineCharactersAsASingleW" +
             "orkTitleWithNinety", "", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("8", "Author", "TitleWithNinety Nine Characters Work Title With NinetyNine Characters WorkTitle W" +
-            "ithNinetyCharacter", "Description 4", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("9", "Author", "Title With a Hundred Characters Title With a Hundred Characters Title With a Hund" +
-            "red Characterssssss", "", "Bad request", null)]
+        [NUnit.Framework.TestCaseAttribute("8", "Author", "Title With a Hundred Characters Title With a Hundred Characters Title With a Hund" +
+            "red Charactersssss", "Description 4", "OK", null)]
+        [NUnit.Framework.TestCaseAttribute("9", "Author", "Title With a Hundred and One Characters Title With a Hundred and One Characters T" +
+            "itle With a Hundredd", "", "BadRequest", null)]
         [NUnit.Framework.TestCaseAttribute("10", "Author", "Title with {symbols} @!\"#$%&\'()*+,-./", "Description 4", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("11", "Author", "TitleWithTwentyNice", "Description with 255 letters. Description with 255 letters. Description with 255 " +
-            "letters. Description with 255 letters. Description with 255 letters. Description" +
-            " with 255 letters. Description with 255 letters. Description with 255 letters. D" +
-            "escription wit", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("12", "Author", "TitleWithTwentyNice", @"Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with", "OK", null)]
-        public virtual void CreateANewBooks(string id, string author, string title, string description, string status, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("11", "Author", "TitleWithTwentyNice", @"Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description with 255 letters. Description witх", "OK", null)]
+        public virtual void CreateANewBook(string id, string author, string title, string description, string status, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -99,98 +95,123 @@ namespace Bede.Features
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new books", null, @__tags);
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new book", null, @__tags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 8
- testRunner.When(string.Format("I create a new book with parameter: {0},{1},{2},{3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9
- testRunner.Then(string.Format("a proper {0} is returned from system", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.And("correct book details are returned from system", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then(string.Format("system return a proper {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 11
+ testRunner.And("proper details of the registered book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete a book and check the books left into the library")]
-        [NUnit.Framework.TestCaseAttribute("13", "Author13", "Title13", "Description13", null)]
-        [NUnit.Framework.TestCaseAttribute("14", "Author13", "Title13", "Description13", null)]
-        public virtual void DeleteABookAndCheckTheBooksLeftIntoTheLibrary(string id, string author, string title, string description, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Delete a book and verify it cannot be accessed")]
+        [NUnit.Framework.TestCaseAttribute("12", "Author 12", "Title 12", "Description13", "NoContent", "NotFound", null)]
+        public virtual void DeleteABookAndVerifyItCannotBeAccessed(string id, string author, string title, string description, string status, string deleteStatus, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a book and check the books left into the library", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a book and verify it cannot be accessed", null, exampleTags);
 #line 27
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 28
- testRunner.When(string.Format("I create a new book with parameter: {0},{1},{2},{3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 29
  testRunner.When("I delete the created book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 30
+ testRunner.Then(string.Format("system return a proper {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 31
+ testRunner.When("I try to access the book by <id>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
+ testRunner.Then(string.Format("system return a proper {0}", deleteStatus), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Remove already deleted book")]
-        public virtual void RemoveAlreadyDeletedBook()
+        [NUnit.Framework.DescriptionAttribute("Update Author, Title and Description of a book")]
+        public virtual void UpdateAuthorTitleAndDescriptionOfABook()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove already deleted book", null, ((string[])(null)));
-#line 37
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Author, Title and Description of a book", null, ((string[])(null)));
+#line 38
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Update the details of a book")]
-        public virtual void UpdateTheDetailsOfABook()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update the details of a book", null, ((string[])(null)));
 #line 39
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
+ testRunner.When("I create a new book with parameters - 13, \"Author13\", \"Title13\" and \"Description1" +
+                    "3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 40
- testRunner.When("I update a book with <id> with <Authro>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.And("I update the last created book with parameters - id 13, \"Updated Author\", \"This i" +
+                    "s new title of the book.\" and \"Description of the UDPATED book.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 41
- testRunner.Then("the book is correctly book updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 42
- testRunner.When("I update the <", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("the updated book details are coorect", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get all books")]
-        public virtual void GetAllBooks()
+        [NUnit.Framework.DescriptionAttribute("Get all")]
+        public virtual void GetAll()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all books", null, ((string[])(null)));
-#line 44
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all", null, ((string[])(null)));
 #line 45
- testRunner.Given("I request all books from the librabry", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
- testRunner.Then("I receive a full list of books", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 47
- testRunner.And("the details of each book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get a book details")]
-        public virtual void GetABookDetails()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a book details", null, ((string[])(null)));
-#line 50
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 51
- testRunner.Given("I request a the details of a single book from the library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
- testRunner.Then("I receive the", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Author",
+                        "Title",
+                        "Description"});
+            table1.AddRow(new string[] {
+                        "14",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "15",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "16",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "18",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "19",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "20",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "21",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+            table1.AddRow(new string[] {
+                        "22",
+                        "Author13",
+                        "Title13",
+                        "Description13"});
+#line 46
+ testRunner.When("I create eight books with params", ((string)(null)), table1, "When ");
+#line 56
+ testRunner.Then("I can receive a proper list of books by searching with <tearms>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 57
+ testRunner.And("the details of each book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
