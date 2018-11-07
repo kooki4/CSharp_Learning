@@ -111,42 +111,42 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Delete a book and verify it cannot be accessed")]
-        [NUnit.Framework.TestCaseAttribute("12", "Author 12", "Title 12", "Description13", "NoContent", "NotFound", null)]
+        [NUnit.Framework.TestCaseAttribute("12", "Author 12", "Title 12", "Description 12", "NoContent", "NotFound", null)]
         public virtual void DeleteABookAndVerifyItCannotBeAccessed(string id, string author, string title, string description, string status, string deleteStatus, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a book and verify it cannot be accessed", null, exampleTags);
-#line 27
+#line 28
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 28
- testRunner.When(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 29
- testRunner.When("I delete the created book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
- testRunner.Then(string.Format("system return a proper {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I delete the created book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 31
- testRunner.When("I try to access the book by <id>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then(string.Format("system return a proper {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 32
+ testRunner.When("I try to access the book by <id>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
  testRunner.Then(string.Format("system return a proper {0}", deleteStatus), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Update Author, Title and Description of a book")]
-        public virtual void UpdateAuthorTitleAndDescriptionOfABook()
+        [NUnit.Framework.DescriptionAttribute("Create and update a book")]
+        public virtual void CreateAndUpdateABook()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Author, Title and Description of a book", null, ((string[])(null)));
-#line 38
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create and update a book", null, ((string[])(null)));
+#line 40
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 39
+#line 41
  testRunner.When("I create a new book with parameters - 13, \"Author13\", \"Title13\" and \"Description1" +
                     "3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 40
+#line 42
     testRunner.And("I update the last created book with parameters - id 13, \"Updated Author\", \"This i" +
                     "s new title of the book.\" and \"Description of the UDPATED book.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 43
  testRunner.Then("the updated book details are coorect", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -157,7 +157,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void GetAll()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all", null, ((string[])(null)));
-#line 45
+#line 47
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -169,49 +169,49 @@ this.ScenarioInitialize(scenarioInfo);
             table1.AddRow(new string[] {
                         "14",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "15",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "16",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "18",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "19",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "20",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "21",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
             table1.AddRow(new string[] {
                         "22",
                         "Author13",
-                        "Title13",
+                        "TestTitle13",
                         "Description13"});
-#line 46
+#line 48
  testRunner.When("I create eight books with params", ((string)(null)), table1, "When ");
-#line 56
- testRunner.Then("I can receive a proper list of books by searching with <tearms>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
- testRunner.And("the details of each book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+ testRunner.And("I search for a book with term \"Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+ testRunner.Then("the list of books from search result and registered books are the same", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

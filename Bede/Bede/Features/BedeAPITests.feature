@@ -9,6 +9,7 @@ Scenario Outline: Create a new book
 	When I create a new book with parameters - <Id>, <Author>, <Title> and <Description>
 	Then system return a proper <Status>
 	And proper details of the registered book
+
 Examples:
 	| Id | Author                          | Title                                                                                                 | Description                                                                                                                                                                                                                                                      | Status     |
 	| 1  | AuthorWithTwentyNineLettersss   | Title 1                                                                                               | Test                                                                                                                                                                                                                                                             | OK         |
@@ -30,12 +31,13 @@ Scenario Outline: Delete a book and verify it cannot be accessed
 	Then system return a proper <Status>
 	When I try to access the book by <id>
 	Then system return a proper <deleteStatus>
+
 Examples: 
-	| Id | Author    | Title    | Description   | Status    | deleteStatus |
-	| 12 | Author 12 | Title 12 | Description13 | NoContent | NotFound     |
+	| Id | Author    | Title    | Description    | Status    | deleteStatus |
+	| 12 | Author 12 | Title 12 | Description 12 | NoContent | NotFound     |
 
 
-Scenario: Update Author, Title and Description of a book
+Scenario: Create and update a book
 	When I create a new book with parameters - 13, "Author13", "Title13" and "Description13"
     And I update the last created book with parameters - id 13, "Updated Author", "This is new title of the book." and "Description of the UDPATED book."
 	Then the updated book details are coorect
@@ -45,13 +47,13 @@ Scenario: Update Author, Title and Description of a book
 Scenario: Get all 
 	When I create eight books with params
 	| Id | Author   | Title   | Description   |
-	| 14 | Author13 | Title13 | Description13 |
-	| 15 | Author13 | Title13 | Description13 |
-	| 16 | Author13 | Title13 | Description13 |
-	| 18 | Author13 | Title13 | Description13 |
-	| 19 | Author13 | Title13 | Description13 |
-	| 20 | Author13 | Title13 | Description13 |
-	| 21 | Author13 | Title13 | Description13 |
-	| 22 | Author13 | Title13 | Description13 |
-	Then I can receive a proper list of books by searching with <tearms>
-	And the details of each book
+	| 14 | Author13 | TestTitle13 | Description13 |
+	| 15 | Author13 | TestTitle13 | Description13 |
+	| 16 | Author13 | TestTitle13 | Description13 |
+	| 18 | Author13 | TestTitle13 | Description13 |
+	| 19 | Author13 | TestTitle13 | Description13 |
+	| 20 | Author13 | TestTitle13 | Description13 |
+	| 21 | Author13 | TestTitle13 | Description13 |
+	| 22 | Author13 | TestTitle13 | Description13 |
+	And I search for a book with term "Test"
+	Then the list of books from search result and registered books are the same
