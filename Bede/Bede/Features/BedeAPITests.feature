@@ -6,7 +6,7 @@
 
 @mytag
 Scenario Outline: Create a new book
-	When I create a new book with parameters - <Id>, <Author>, <Title> and <Description>
+	Given I create a new book with parameters - <Id>, <Author>, <Title> and <Description>
 	Then system return a proper <Status>
 	And proper details of the registered book
 
@@ -26,7 +26,7 @@ Examples:
 
 
 Scenario Outline: Delete a book and verify it cannot be accessed
-	When I create a new book with parameters - <Id>, <Author>, <Title> and <Description>
+	Given I create a new book with parameters - <Id>, <Author>, <Title> and <Description>
 	When I delete the created book
 	Then system return a proper <Status>
 	When I try to access the book by <id>
@@ -38,22 +38,51 @@ Examples:
 
 
 Scenario: Create and update a book
-	When I create a new book with parameters - 13, "Author13", "Title13" and "Description13"
-    And I update the last created book with parameters - id 13, "Updated Author", "This is new title of the book." and "Description of the UDPATED book."
+	Given I create a new book with parameters - 13, "Author13", "Title13" and "Description13"
+    When I update the last created book with parameters - id 13, "Updated Author", "This is new title of the book." and "Description of the UDPATED book."
 	Then the updated book details are coorect
 
+Scenario: Receive list of books matching the search term for Title
+	Given I create books with params
+	| Id | Author          | Title             | Description            |
+	| 14 | Author          | Test Title 14     | Description of book 14 |
+	| 15 | Author          | Title of the Test | Description13          |
+	| 16 | Author J Oliver | TestTitle         | Description13          |
+	| 18 | Author J Oliver | TitleOfTheTest    | Description13          |
+	| 19 | Author J Oliver | TitleOfTestABC    | Description13          |
+	| 20 | Author J Oliver | %20Test%          | Description13          |
+	| 21 | Author J Oliver | \n\Test\Title     | Description13          |
+	| 22 | Author J Oliver | $#!Test*&^%       | Description13          |
+	When I search for a book "Title" with term "Test"
+	Then the list of books from search result and registered books are the equal
 
 
-Scenario: Get all 
-	When I create eight books with params
-	| Id | Author   | Title   | Description   |
-	| 14 | Author13 | TestTitle13 | Description13 |
-	| 15 | Author13 | TestTitle13 | Description13 |
-	| 16 | Author13 | TestTitle13 | Description13 |
-	| 18 | Author13 | TestTitle13 | Description13 |
-	| 19 | Author13 | TestTitle13 | Description13 |
-	| 20 | Author13 | TestTitle13 | Description13 |
-	| 21 | Author13 | TestTitle13 | Description13 |
-	| 22 | Author13 | TestTitle13 | Description13 |
-	And I search for a book with term "Test"
-	Then the list of books from search result and registered books are the same
+Scenario: Receive all available books matching the search term for Author
+	Given I create books with params
+	| Id | Author               | Title             | Description            |
+	| 14 | aztecAuthor'Def      | Test Title 14     | Description of book 14 |
+	| 15 | \nAuthor\            | Title of the Test | Description13          |
+	| 16 | %20Author% J Oliver  | TestTitle         | Description13          |
+	| 18 | $#!Test*&^% J Oliver | TitleOfTheTest    | Description13          |
+	When I search for a book "Auhtor" with term "Test"
+	Then the list of books from search result and registered books are the equal
+
+
+Scenario: Receive empty list of books - search with dummy or blank term 
+	Given I create books with params
+	| Id | Author          | Title             | Description            |
+	| 23 | Author          | Test Title 14     | Description of book 14 |
+	| 24 | Author          | Title of the Test | Description13          |
+	| 25 | Author J Oliver | TestTitle         | Description13          |
+	When I search for a book "Title" with term "None"
+	Then the list of books returned by the search result is empty
+	When I search for a book "Title" with term ""
+	Then the list of books returned by the search result is empty
+	When I search for a book "Author" with term "None"
+	Then the list of books returned by the search result is empty
+	When I search for a book "Author" with term ""
+	Then the list of books returned by the search result is empty
+	When I search for a book "Description" with term "None"
+	Then the list of books returned by the search result is empty
+	When I search for a book "Description" with term ""
+	Then the list of books returned by the search result is empty

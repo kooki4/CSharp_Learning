@@ -29,7 +29,7 @@ namespace Bede
             return _str;
         }
 
-        [When(@"I create a new book with parameters - (.*), (.*), (.*) and (.*)")]
+        [Given(@"I create a new book with parameters - (.*), (.*), (.*) and (.*)")]
         public void GivenICreateANewBookWithParameters(int Id, string Author, string Title, string Description)
         {
             _book = new Book()
@@ -69,6 +69,19 @@ namespace Bede
             _statusMessage = FormatMessage(_restResponse.Content);
 
             ScenarioContext.Current.Add($"Book{_book.Id}", _book);
+        }
+
+        [Given(@"I create books with params")]
+        public void WhenICreateBooksWithParams(Table table)
+        {
+            var books = table.CreateSet<Book>();
+
+            foreach (Book book in books)
+            {
+                GivenICreateANewBookWithParameters(book.Id, book.Author, book.Title, book.Description, true);
+            }
+
+            ScenarioContext.Current.Add("BooksList", books);
         }
 
         [When(@"I update the last created book with parameters - id (.*), (.*), (.*) and (.*)")]
@@ -118,32 +131,14 @@ namespace Bede
             _statusMessage = FormatMessage(_restResponse.Content);
         }
 
-        [When(@"I create eight books with params")]
-        public void WhenICreateBooksWithParams(Table table)
+        [When(@"I search for a book (.*) with term (.*)")]
+        public void WhenISearchForABookWith(string param,string searchTerm)
         {
-            var books = table.CreateSet<Book>();
-
-            foreach(Book book in books)
-            {
-                GivenICreateANewBookWithParameters(book.Id, book.Author, book.Title, book.Description, true);
-            }
-
-            ScenarioContext.Current.Add("BooksList", books);
-        }
-
-        [When(@"I search for a book with term (.*)")]
-        public void WhenISearchForABookWith(string searchTerm)
-        {
-            searchTerm = $"{searchTerm}";
-
             var request = new HttpRequestWrapper()
                 .SetMethod(Method.GET)
-                .SetResource("api/books?").AddParameter("Title=", searchTerm);
+                .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-
-            _statusMessage = FormatMessage(_restResponse.Content);
-
         }
 
         [Then(@"system return a proper (.*)")]
@@ -191,13 +186,12 @@ namespace Bede
             Assert.AreEqual(bookUpdateDetails.Description, Book.Description);
         }
 
-        [Then(@"the list of books from search result and registered books are the same")]
+        [Then(@"the list of books from search result and registered books are the equal")]
         public void ThenTheListOfBooksFromSearchResultAndRegisteredBooksAreTheSame()
         {
             var bookList = ScenarioContext.Current.Get<IList>("BooksList");
             var searchResult = ScenarioContext.Current.Values;
 
-            //Assert.AreEqual(bookList, searchResult);
             for(int i = 0; i < bookList.Count; i++)
             {
                 var expectedBook = (Book)bookList[i];
@@ -210,5 +204,10 @@ namespace Bede
             }
         }
 
+        [Then(@"the list of books returned by the search result is empty")]
+        public void ThenTheListOfBooksReturnedByTheSearchResultIsEmpty()
+        {
+            Assert.AreEqual("0", ScenarioContext.Current.Values.Count);
+        }
     }
 }
