@@ -134,15 +134,21 @@ namespace Bede
         [When(@"I search for a book (.*) with term (.*)")]
         public void WhenISearchForABookWith(string param,string searchTerm)
         {
+            ScenarioContext.Current.Clear();
+
             var request = new HttpRequestWrapper()
                 .SetMethod(Method.GET)
                 .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
+            var kyp = ScenarioContext.Current.Values;
+            if(_restResponse.Content.ToString().Length > 0)
+            {
+                ScenarioContext.Current.Add("NotEmpty", _restResponse.Content);
+            }
         }
 
-        [Then(@"system return a proper (.*)")]
-        [Then(@"proper details of the registered book")]
+        [Then(@"system return a proper (.*) with correct details of the book")]
         public void ThenAProperStatusIsReturned(HttpStatusCode status)
         {
             var bookVerification = ScenarioContext.Current.Get<Book>("Book");
@@ -207,7 +213,7 @@ namespace Bede
         [Then(@"the list of books returned by the search result is empty")]
         public void ThenTheListOfBooksReturnedByTheSearchResultIsEmpty()
         {
-            Assert.AreEqual("0", ScenarioContext.Current.Values.Count);
+            Assert.AreEqual(0, ScenarioContext.Current.Values.Count);
         }
     }
 }

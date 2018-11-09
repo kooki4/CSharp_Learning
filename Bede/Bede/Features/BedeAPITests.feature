@@ -7,8 +7,7 @@
 @mytag
 Scenario Outline: Create a new book
 	Given I create a new book with parameters - <Id>, <Author>, <Title> and <Description>
-	Then system return a proper <Status>
-	And proper details of the registered book
+	Then system return a proper <Status> with correct details of the book
 
 Examples:
 	| Id | Author                          | Title                                                                                                 | Description                                                                                                                                                                                                                                                      | Status     |
@@ -57,7 +56,7 @@ Scenario: Receive list of books matching the search term for Title
 	Then the list of books from search result and registered books are the equal
 
 
-Scenario: Receive all available books matching the search term for Author
+Scenario: Receive list of books matching the search term for Author
 	Given I create books with params
 	| Id | Author               | Title             | Description            |
 	| 14 | aztecAuthor'Def      | Test Title 14     | Description of book 14 |
