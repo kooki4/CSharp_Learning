@@ -19,8 +19,6 @@ namespace Bede
     {
         private IRestResponse _restResponse;
         private Book _book;
-        private HttpStatusCode _statusCode;
-        private string _statusMessage;
         private string _str;
         private string FormatMessage(string content)
         {
@@ -45,10 +43,9 @@ namespace Bede
                             .AddJsonContent(_book);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-            _statusCode = _restResponse.StatusCode;
-            _statusMessage = FormatMessage(_restResponse.Content);
 
             ScenarioContext.Current.Add("Book", _book);
+            ScenarioContext.Current.Add("srvResponse", _restResponse);
         }
         public void GivenICreateANewBookWithParameters(int Id, string Author, string Title, string Description, bool iterate)
         {
@@ -65,8 +62,6 @@ namespace Bede
                             .AddJsonContent(_book);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-            _statusCode = _restResponse.StatusCode;
-            _statusMessage = FormatMessage(_restResponse.Content);
 
             ScenarioContext.Current.Add($"Book{_book.Id}", _book);
         }
@@ -100,8 +95,6 @@ namespace Bede
                 .AddJsonContent(bookUpdateDetail);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-            _statusCode = _restResponse.StatusCode;
-            _statusMessage = FormatMessage(_restResponse.Content);
 
             ScenarioContext.Current.Add("BookUpdateDetails", bookUpdateDetail);
         }
@@ -116,6 +109,9 @@ namespace Bede
                             .SetResource("api/books").AddParameter("id", bookDel.Id);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
+
+            ScenarioContext.Current.Remove("srvResponse");
+            ScenarioContext.Current.Add("srvResponse", _restResponse);
         }
 
         [When(@"I try to access the book by (.*)")]
@@ -128,58 +124,78 @@ namespace Bede
                             .SetResource("api/books").AddParameter("id", bookToAcc.Id);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-            _statusMessage = FormatMessage(_restResponse.Content);
+
+            ScenarioContext.Current.Remove("srvResponse");
+            ScenarioContext.Current.Add("srvResponse", _restResponse);
         }
 
         [When(@"I search for a book (.*) with term (.*)")]
         public void WhenISearchForABookWith(string param,string searchTerm)
-        {
-            ScenarioContext.Current.Clear();
-
+         {
             var request = new HttpRequestWrapper()
                 .SetMethod(Method.GET)
                 .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-            var kyp = ScenarioContext.Current.Values;
-            if(_restResponse.Content.ToString().Length > 0)
+
+            if(_restResponse.Content.Length > 0)
             {
                 ScenarioContext.Current.Add("NotEmpty", _restResponse.Content);
             }
         }
 
+        [When(@"I search with not existing book ""(.*)"" with term ""(.*)""")]
+        public void WhenISearchWithNotExistingBookWithTerm(string param, string searchTerm)
+        {
+            var request = new HttpRequestWrapper()
+                            .SetMethod(Method.GET)
+                            .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
+            _restResponse = new RestResponse();
+            _restResponse = request.Execute();
+            var kyp = ScenarioContext.Current.Values;
+        }
+
+
         [Then(@"system return a proper (.*) with correct details of the book")]
-        public void ThenAProperStatusIsReturned(HttpStatusCode status)
+        public void ThenAProperStatusIsReturned(string status)
         {
             var bookVerification = ScenarioContext.Current.Get<Book>("Book");
+            var response = ScenarioContext.Current.Get<RestResponse>("srvResponse");
+            var srvRespMsg = FormatMessage(response.Content);
 
-            if (status.ToString().Equals("OK"))
+            if (status.Equals("OK"))
             {
-                Assert.AreEqual($"Id:{bookVerification.Id},Title:{bookVerification.Title},Description:{bookVerification.Description},Author:{bookVerification.Author}", _statusMessage);
+                Assert.AreEqual($"Id:{bookVerification.Id},Title:{bookVerification.Title},Description:{bookVerification.Description},Author:{bookVerification.Author}", srvRespMsg);
             }
-            else if (status.ToString().Equals("BadRequest"))
+            else if (status.Equals("BadRequest"))
             {
                 if (bookVerification.Author.ToString().Length > 30)
                 {
-                    Assert.AreEqual("Message:Book.Author should not exceed 30 characters!\\r\\nParameter name: Book.Author", _statusMessage);
+                    Assert.AreEqual("Message:Book.Author should not exceed 30 characters!\\r\\nParameter name: Book.Author", srvRespMsg);
                 }
                 else if (bookVerification.Title.Length > 100)
                 {
-                    Assert.AreEqual("Message:Book.Title should not exceed 100 characters!\\r\\nParameter name: Book.Author", _statusMessage);
+                    Assert.AreEqual("Message:Book.Title should not exceed 100 characters!\\r\\nParameter name: Book.Title", srvRespMsg);
                 }
                 Assert.IsNotEmpty(bookVerification.Description);
             }
-            else if (status.ToString().Equals("NoContent"))
+            else if (status.Equals("NoContent"))
             {
-                //Response is empty in this case.
-                Console.WriteLine("Item deleted!");
+                Assert.AreEqual(status, response.StatusCode.ToString());
             }
-            else if (status.ToString().Equals("NotFound"))
-            {
-                Assert.AreEqual($"Message:Book with id {bookVerification.Id} not found!", _statusMessage);
-                Console.WriteLine(_statusMessage);
-            }
+
         }
+
+        [Then(@"system return a proper (.*) status")]
+        public void ThenSystemReturnAProperNotFound(string status)
+        {
+            var bookVerification = ScenarioContext.Current.Get<Book>("Book");
+            var response = ScenarioContext.Current.Get<RestResponse>("srvResponse");
+            var srvRespMsg = FormatMessage(response.Content);
+
+             Assert.AreEqual($"Message:Book with id {bookVerification.Id} not found!", srvRespMsg);
+        }
+
 
         [Then(@"the updated book details are coorect")]
         public void ThenTheUpdatedBookDetailsAreCoorect()
@@ -213,6 +229,8 @@ namespace Bede
         [Then(@"the list of books returned by the search result is empty")]
         public void ThenTheListOfBooksReturnedByTheSearchResultIsEmpty()
         {
+            //var asd = response.Content.Length;
+
             Assert.AreEqual(0, ScenarioContext.Current.Values.Count);
         }
     }
