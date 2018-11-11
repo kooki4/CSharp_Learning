@@ -63,7 +63,7 @@ namespace Bede
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
-            ScenarioContext.Current.Add($"Book{_book.Id}", _book);
+           // ScenarioContext.Current.Add($"Book{_book.Id}", _book);
         }
 
         [Given(@"I create books with params")]
@@ -91,11 +91,12 @@ namespace Bede
             };
             var request = new HttpRequestWrapper()
                 .SetMethod(Method.PUT)
-                .SetResource("api/books")
+                .SetResource($"api/books/{bookUpdateDetail.Id}")
                 .AddJsonContent(bookUpdateDetail);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
+            ScenarioContext.Current.Add("BookUpdateResponse", _restResponse);
             ScenarioContext.Current.Add("BookUpdateDetails", bookUpdateDetail);
         }
 
@@ -200,7 +201,7 @@ namespace Bede
         [Then(@"the updated book details are coorect")]
         public void ThenTheUpdatedBookDetailsAreCoorect()
         {
-            Book Book = ScenarioContext.Current.Get<Book>("Book");
+            Book Book = JsonConvert.DeserializeObject<Book>(ScenarioContext.Current.Get<RestResponse>("BookUpdateResponse").Content);
             Book bookUpdateDetails = ScenarioContext.Current.Get<Book>("BookUpdateDetails");
 
             Assert.AreEqual(bookUpdateDetails.Author, Book.Author);
@@ -211,18 +212,22 @@ namespace Bede
         [Then(@"the list of books from search result and registered books are the equal")]
         public void ThenTheListOfBooksFromSearchResultAndRegisteredBooksAreTheSame()
         {
-            var bookList = ScenarioContext.Current.Get<IList>("BooksList");
-            var searchResult = ScenarioContext.Current.Values;
+            //Get expected books in IList, due to the usage of Context Values.
+            var expBooksList = ScenarioContext.Current.Get<IList>("BooksList");
 
-            for(int i = 0; i < bookList.Count; i++)
+            //Get the actual result from the service as a string and desirialize it in List of object type Book.
+            var actBooksList = JsonConvert.DeserializeObject<List<Book>>(ScenarioContext.Current.Get<string>("NotEmpty"));
+
+            Assert.AreEqual(expBooksList.Count, actBooksList.Count);
+
+            for (int i = 0; i < expBooksList.Count; i++)
             {
-                var expectedBook = (Book)bookList[i];
-                var key = expectedBook.Id;
-                Book returnedBook = ScenarioContext.Current.Get<Book>($"Book{expectedBook.Id}");
+                var expBook = (Book)expBooksList[i];
+                var actBook = actBooksList[i];
 
-                Assert.AreEqual(expectedBook.Author, returnedBook.Author);
-                Assert.AreEqual(expectedBook.Title, returnedBook.Title);
-                Assert.AreEqual(expectedBook.Description, returnedBook.Description);
+               // Assert.AreEqual(expBook.Author, actBook.Author);
+                Assert.AreEqual(expBook.Title, actBook.Title);
+                Assert.AreEqual(expBook.Description, actBook.Description);
             }
         }
 

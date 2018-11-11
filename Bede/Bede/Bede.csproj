@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Steps\BedeAPITestsSteps.cs" />
+    <Compile Include="Steps\BedeAPITestSteps.cs" />
     <Compile Include="Features\BedeAPITests.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -72,6 +72,7 @@
     <Compile Include="Model\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\HttpRequestWrapper.cs" />
+    <Compile Include="Steps\BedeScenarioHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

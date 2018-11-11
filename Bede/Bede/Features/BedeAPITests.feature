@@ -33,7 +33,7 @@ Scenario Outline: Delete a book and verify it cannot be accessed
 
 Examples: 
 	| Id | Author    | Title    | Description    | Status    |
-	| 12 | Author 12 | Title 12 | Description 12 | NoContent |
+	| 1  | Author 12 | Title 12 | Description 12 | NoContent |
 
 
 Scenario: Create and update a book
@@ -44,14 +44,14 @@ Scenario: Create and update a book
 Scenario: Receive list of books matching the search term for Title
 	Given I create books with params
 	| Id | Author          | Title             | Description            |
-	| 14 | Author          | Test Title 14     | Description of book 14 |
-	| 15 | Author          | Title of the Test | Description            |
-	| 16 | Author J Oliver | TestTitle         | Description            |
-	| 18 | Author J Oliver | TitleOfTheTest    | Description            |
-	| 19 | Author J Oliver | TitleOfTestABC    | Description            |
-	| 20 | Author J Oliver | %20Test%          | Description            |
-	| 21 | Author J Oliver | \n\Test\Title     | Description            |
-	| 22 | Author J Oliver | $#!Test*&^%       | Description            |
+	| 1 | Author          | Test Title 14     | Description of book 14 |
+	| 2 | Author          | Title of the Test | Description            |
+	| 3 | Author J Oliver | TestTitle         | Description            |
+	| 4 | Author J Oliver | TitleOfTheTest    | Description            |
+	| 5 | Author J Oliver | TitleOfTestABC    | Description            |
+	| 6 | Author J Oliver | %20Test%          | Description            |
+	| 7 | Author J Oliver | \n\Test\Title     | Description            |
+	| 8 | Author J Oliver | $#!Test*&^%       | Description            |
 	When I search for a book "Title" with term "Test"
 	Then the list of books from search result and registered books are the equal
 
@@ -61,10 +61,20 @@ Scenario: Receive list of books matching the search term for Title
 Scenario: Receive list of books matching the search term for Author
 	Given I create books with params
 	| Id | Author               | Title             | Description            |
-	| 14 | aztecAuthor'Def      | Test Title 14     | Description of book 14 |
-	| 15 | \nAuthor\            | Title of the Test | Description13          |
-	| 16 | %20Author% J Oliver  | TestTitle         | Description13          |
-	| 18 | $#!Test*&^% J Oliver | TitleOfTheTest    | Description13          |
+	| 1 | aztecAuthor'Def      | Test Title 14     | Description of book 14 |
+	| 2 | \nAuthor\            | Title of the Test | Description13          |
+	| 3 | %20Author% J Oliver  | TestTitle         | Description13          |
+	| 4 | $#!Test*&^% J Oliver | TitleOfTheTest    | Description13          |
+	When I search for a book "Auhtor" with term "Test"
+	Then the list of books from search result and registered books are the equal
+
+Scenario: Receive list of books matching the search term for Description
+	Given I create books with params
+	| Id | Author               | Title             | Description            |
+	| 1  | aztecAuthor'Def      | Test Title 14     | Description of book 14 |
+	| 2  | \nAuthor\            | Title of the Test | Description13          |
+	| 3  | %20Author% J Oliver  | TestTitle         | Description13          |
+	| 4  | $#!Test*&^% J Oliver | TitleOfTheTest    | Description13          |
 	When I search for a book "Auhtor" with term "Test"
 	Then the list of books from search result and registered books are the equal
 
@@ -72,9 +82,9 @@ Scenario: Receive list of books matching the search term for Author
 Scenario: Receive empty list of books - search with dummy or blank term 
 	Given I create books with params
 	| Id | Author          | Title             | Description            |
-	| 23 | Author          | Test Title 14     | Description of book 14 |
-	| 24 | Author          | Title of the Test | Description13          |
-	| 25 | Author J Oliver | TestTitle         | Description13          |
+	| 1  | Author          | Test Title 14     | Description of book 14 |
+	| 2  | Author          | Title of the Test | Description13          |
+	| 3  | Author J Oliver | TestTitle         | Description13          |
 	When I search with not existing book "Title" with term "None"
 	Then the list of books returned by the search result is empty
 	When I search for a book "Title" with term ""
