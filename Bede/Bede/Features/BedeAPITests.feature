@@ -1,7 +1,7 @@
-﻿Feature: BedeAPITests
-	In order to manage a library content
+﻿Feature: Libraray Management Tests
+	In manage a library content
 	As a Library Manager
-	I want to be able to Create, Update, Delete and Find for books
+	I want to be able to Create, Update, Delete and Find books
 
 
 @mytag

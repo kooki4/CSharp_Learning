@@ -18,8 +18,8 @@ namespace Bede.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("BedeAPITests")]
-    public partial class BedeAPITestsFeature
+    [NUnit.Framework.DescriptionAttribute("Libraray Management Tests")]
+    public partial class LibrarayManagementTestsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,8 +31,8 @@ namespace Bede.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "BedeAPITests", "\tIn order to manage a library content\r\n\tAs a Library Manager\r\n\tI want to be able " +
-                    "to Create, Update, Delete and Find for books", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Libraray Management Tests", "\tIn manage a library content\r\n\tAs a Library Manager\r\n\tI want to be able to Create" +
+                    ", Update, Delete and Find books", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

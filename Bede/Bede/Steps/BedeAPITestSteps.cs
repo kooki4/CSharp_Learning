@@ -62,8 +62,6 @@ namespace Bede
                             .AddJsonContent(_book);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-
-           // ScenarioContext.Current.Add($"Book{_book.Id}", _book);
         }
 
         [Given(@"I create books with params")]
@@ -153,9 +151,7 @@ namespace Bede
                             .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
             _restResponse = new RestResponse();
             _restResponse = request.Execute();
-            var kyp = ScenarioContext.Current.Values;
         }
-
 
         [Then(@"system return a proper (.*) with correct details of the book")]
         public void ThenAProperStatusIsReturned(string status)
@@ -196,7 +192,6 @@ namespace Bede
 
              Assert.AreEqual($"Message:Book with id {bookVerification.Id} not found!", srvRespMsg);
         }
-
 
         [Then(@"the updated book details are coorect")]
         public void ThenTheUpdatedBookDetailsAreCoorect()
