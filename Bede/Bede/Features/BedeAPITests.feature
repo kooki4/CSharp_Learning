@@ -41,6 +41,7 @@ Scenario: Create and update a book
     When I update the last created book with parameters - id 13, "Updated Author", "This is new title of the book." and "Description of the UDPATED book."
 	Then the updated book details are coorect
 
+
 Scenario: Receive list of books matching the search term for Title
 	Given I create books with params
 	| Id | Author          | Title             | Description           |
@@ -63,9 +64,7 @@ Scenario: Receive list of books matching the search term for Title
 	When I search for a book "Title" with term "Test"
 	Then the list of books from search result and registered books are the equal
 
-# Following does not work. I am using the class Book and Context after creation of each book, which is the same. 
-# I need to get the whole result from the RESPONSE 
-# And somehow make it as single classes
+
 Scenario: Receive list of books matching the search term for Author
 	Given I create books with params
 	| Id | Author               | Title             | Description              |
@@ -79,6 +78,7 @@ Scenario: Receive list of books matching the search term for Author
 	| 4  | $#!Test*&^% J Oliver | TitleOfTheTest    | Description of Book    4 |
 	When I search for a book "Auhtor" with term "Author"
 	Then the list of books from search result and registered books are the equal
+
 
 Scenario: Receive list of books matching the search term for Description
 	Given I create books with params
