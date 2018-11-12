@@ -12,7 +12,6 @@ namespace Bede.Requests
         public HttpRequestWrapper()
         {
             _restRequest = new RestRequest();
-            //
         }
 
         public HttpRequestWrapper SetResource(string resource)

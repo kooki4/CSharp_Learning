@@ -225,7 +225,7 @@ namespace Bede
                 var expBook = (Book)expBooksList[i];
                 var actBook = actBooksList[i];
 
-               // Assert.AreEqual(expBook.Author, actBook.Author);
+                Assert.AreEqual(expBook.Author, actBook.Author);
                 Assert.AreEqual(expBook.Title, actBook.Title);
                 Assert.AreEqual(expBook.Description, actBook.Description);
             }
@@ -234,8 +234,6 @@ namespace Bede
         [Then(@"the list of books returned by the search result is empty")]
         public void ThenTheListOfBooksReturnedByTheSearchResultIsEmpty()
         {
-            //var asd = response.Content.Length;
-
             Assert.AreEqual(0, ScenarioContext.Current.Values.Count);
         }
     }
