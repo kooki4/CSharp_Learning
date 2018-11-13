@@ -11,7 +11,6 @@ using System.Net;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-
 namespace Bede
 {
     [Binding]
@@ -34,14 +33,13 @@ namespace Bede
             {
                 Id = Id,
                 Author = Author,
-                Title = Title,
+                Title = Title, 
                 Description = Description
             };
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.POST)
                             .SetResource("api/books")
                             .AddJsonContent(_book);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
             ScenarioContext.Current.Add("Book", _book);
@@ -60,7 +58,6 @@ namespace Bede
                             .SetMethod(Method.POST)
                             .SetResource("api/books")
                             .AddJsonContent(_book);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
         }
 
@@ -91,7 +88,6 @@ namespace Bede
                 .SetMethod(Method.PUT)
                 .SetResource($"api/books/{bookUpdateDetail.Id}")
                 .AddJsonContent(bookUpdateDetail);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
             ScenarioContext.Current.Add("BookUpdateResponse", _restResponse);
@@ -106,7 +102,6 @@ namespace Bede
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.DELETE)
                             .SetResource("api/books").AddParameter("id", bookDel.Id);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
             ScenarioContext.Current.Remove("srvResponse");
@@ -121,7 +116,6 @@ namespace Bede
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.GET)
                             .SetResource("api/books").AddParameter("id", bookToAcc.Id);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
             ScenarioContext.Current.Remove("srvResponse");
@@ -134,7 +128,6 @@ namespace Bede
             var request = new HttpRequestWrapper()
                 .SetMethod(Method.GET)
                 .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
 
             if(_restResponse.Content.Length > 0)
@@ -149,22 +142,21 @@ namespace Bede
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.GET)
                             .SetResource("api/books?").AddParameter($"{param}=", searchTerm);
-            _restResponse = new RestResponse();
             _restResponse = request.Execute();
         }
 
         [Then(@"system return a proper (.*) with correct details of the book")]
-        public void ThenAProperStatusIsReturned(string status)
+        public void ThenAProperStatusIsReturned(HttpStatusCode status)
         {
             var bookVerification = ScenarioContext.Current.Get<Book>("Book");
             var response = ScenarioContext.Current.Get<RestResponse>("srvResponse");
             var srvRespMsg = FormatMessage(response.Content);
 
-            if (status.Equals("OK"))
+            if (status.ToString().Equals("OK"))
             {
                 Assert.AreEqual($"Id:{bookVerification.Id},Title:{bookVerification.Title},Description:{bookVerification.Description},Author:{bookVerification.Author}", srvRespMsg);
             }
-            else if (status.Equals("BadRequest"))
+            else if (status.ToString().Equals("BadRequest"))
             {
                 if (bookVerification.Author.ToString().Length > 30)
                 {
@@ -176,15 +168,46 @@ namespace Bede
                 }
                 Assert.IsNotEmpty(bookVerification.Description);
             }
-            else if (status.Equals("NoContent"))
+            else if (status.ToString().Equals("NoContent"))
             {
-                Assert.AreEqual(status, response.StatusCode.ToString());
+                Assert.AreEqual(status.ToString(), response.StatusCode.ToString());
             }
-
         }
 
+        [Then(@"system return an author is required error message")]
+        public void ThenSystemReturnAnAuthorisRequiredErrorMessage()
+        {
+            var srvRespMsg = ScenarioContext.Current.Get<RestResponse>("srvResponse").Content.ToString();
+            srvRespMsg = FormatMessage(srvRespMsg);
+            string requiredMsgChars = "Message:Book.Author is a required field.\\r\\nParameter name: book.Author";
+
+            Assert.AreEqual(requiredMsgChars, srvRespMsg);
+        }
+
+        [Then(@"system return a title is required error message")]
+        public void ThenSystemReturnATitleIsRequiredErrorMessage()
+        {
+            var srvRespMsg = ScenarioContext.Current.Get<RestResponse>("srvResponse").Content.ToString();
+            srvRespMsg = FormatMessage(srvRespMsg);
+            string requiredMsgChars = "Message:Book.Title is a required field\\r\\nParameter name: Book.Title";
+
+            Assert.AreEqual(requiredMsgChars, srvRespMsg);
+        }
+
+        [Then(@"system return a id is required error message")]
+        public void ThenSystemReturnAIdIsRequiredErrorMessage()
+        {
+            var srvRespMsg = ScenarioContext.Current.Get<RestResponse>("srvResponse").Content.ToString();
+            srvRespMsg = FormatMessage(srvRespMsg);
+            string requiredMsgChars = "Message:Book.Id should be a positive integer!\\r\\nParameter name: book.Id";
+
+            Assert.AreEqual(requiredMsgChars, srvRespMsg);
+        }
+
+
+
         [Then(@"system return a proper (.*) status")]
-        public void ThenSystemReturnAProperNotFound(string status)
+        public void ThenSystemReturnAProperNotFound(HttpStatusCode status)
         {
             var bookVerification = ScenarioContext.Current.Get<Book>("Book");
             var response = ScenarioContext.Current.Get<RestResponse>("srvResponse");

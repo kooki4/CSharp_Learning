@@ -11,15 +11,6 @@ namespace Bede.Steps
     [Binding]
     public sealed class BedeScenarioHooks
     {
-        [BeforeScenario]
-        public void BeforeScenario()
-        {
-            if(ScenarioContext.Current.Count > 0)
-            {
-               throw new SpecFlowException($"Context is not empty but it must be before executing each snecario. ContextInfo: {ScenarioContext.Current.Values}\n");
-            }
-        }
-
         [AfterScenario]
         public void AfterScenario()
         {
