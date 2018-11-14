@@ -133,7 +133,7 @@ namespace Bede
             }
         }
 
-        [When(@"I search with not existing book ""(.*)"" with term ""(.*)""")]
+        [When(@"I search for not existing book ""(.*)"" with term ""(.*)""")]
         public void WhenISearchWithNotExistingBookWithTerm(string param, string searchTerm)
         {
             var request = new HttpRequestWrapper()
@@ -233,7 +233,7 @@ namespace Bede
             //Get the actual result from the service as a string and desirialize it in List of object type Book.
             var actBooksList = JsonConvert.DeserializeObject<List<Book>>(ScenarioContext.Current.Get<string>("NotEmpty"));
 
-            Assert.AreEqual(expBooksList.Count, actBooksList.Count); 
+            Assert.AreEqual(expBooksList.Count, actBooksList.Count);
 
             for (int i = 0; i < expBooksList.Count; i++)
             {
