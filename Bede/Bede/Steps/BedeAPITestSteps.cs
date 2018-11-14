@@ -1,15 +1,14 @@
-﻿using RestSharp;
-using Bede.Model;
+﻿using Bede.Model;
 using Bede.Requests;
-using NUnit.Framework;
 using Newtonsoft.Json;
+using NUnit.Framework;
+using RestSharp;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using System;
-using System.Net;
-using System.Collections;
-using System.Text.RegularExpressions;
 
 namespace Bede
 {
@@ -17,19 +16,17 @@ namespace Bede
     public class BedeAPITestsSteps
     {
         private IRestResponse _restResponse;
-        private Book _book;
-        private string _str;
+
         private string FormatMessage(string content)
         {
             Regex rgx = new Regex("[{-}-\\-\"]");
-            _str = rgx.Replace(content, "");
-            return _str;
+            return rgx.Replace(content, "");
         }
 
         [Given(@"I create a new book with parameters - (.*), (.*), (.*) and (.*)")]
         public void GivenICreateANewBookWithParameters(int Id, string Author, string Title, string Description)
         {
-            _book = new Book()
+            var book = new Book()
             {
                 Id = Id,
                 Author = Author,
@@ -39,15 +36,15 @@ namespace Bede
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.POST)
                             .SetResource("api/books")
-                            .AddJsonContent(_book);
+                            .AddJsonContent(book);
             _restResponse = request.Execute();
 
-            ScenarioContext.Current.Add("Book", _book);
+            ScenarioContext.Current.Add("Book", book);
             ScenarioContext.Current.Add("srvResponse", _restResponse);
         }
         public void GivenICreateANewBookWithParameters(int Id, string Author, string Title, string Description, bool iterate)
         {
-            _book = new Book()
+            var book = new Book()
             {
                 Id = Id,
                 Author = Author,
@@ -57,7 +54,7 @@ namespace Bede
             var request = new HttpRequestWrapper()
                             .SetMethod(Method.POST)
                             .SetResource("api/books")
-                            .AddJsonContent(_book);
+                            .AddJsonContent(book);
             _restResponse = request.Execute();
         }
 
@@ -227,7 +224,7 @@ namespace Bede
             Assert.AreEqual(bookUpdateDetails.Description, Book.Description);
         }
 
-        [Then(@"the list of books from search result and registered books are the equal")]
+        [Then(@"the list of books from search result and registered books are equal")]
         public void ThenTheListOfBooksFromSearchResultAndRegisteredBooksAreTheSame()
         {
             //Get expected books in IList, due to the usage of Context Values.
@@ -236,7 +233,7 @@ namespace Bede
             //Get the actual result from the service as a string and desirialize it in List of object type Book.
             var actBooksList = JsonConvert.DeserializeObject<List<Book>>(ScenarioContext.Current.Get<string>("NotEmpty"));
 
-            Assert.AreEqual(expBooksList.Count, actBooksList.Count);
+            Assert.AreEqual(expBooksList.Count, actBooksList.Count); 
 
             for (int i = 0; i < expBooksList.Count; i++)
             {
