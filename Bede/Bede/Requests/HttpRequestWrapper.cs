@@ -1,6 +1,7 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
-using RestSharp;
+using System.Configuration;
 
 namespace Bede.Requests
 {
@@ -8,6 +9,7 @@ namespace Bede.Requests
     {
         private RestRequest _restRequest;
         private RestClient _restClient;
+        private string _server = ConfigurationManager.AppSettings["server"];
 
         public HttpRequestWrapper()
         {
@@ -44,19 +46,11 @@ namespace Bede.Requests
             _restRequest.AddParameter(name, value);
             return this;
         }
-        public HttpRequestWrapper AddParameters(IDictionary<string, object> parameters)
-        {
-            foreach (var item in parameters)
-            {
-                _restRequest.AddParameter(item.Key, item.Value);
-            }
-            return this;
-        }
         public IRestResponse Execute()
         {
             try
             {
-                _restClient = new RestClient("http://localhost:9000/");
+                _restClient = new RestClient(_server);
                 var response = _restClient.Execute(_restRequest);
                 return response;
 

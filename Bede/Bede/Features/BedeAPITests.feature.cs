@@ -71,23 +71,22 @@ namespace Bede.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create new book and validate returned status and book details")]
+        [NUnit.Framework.DescriptionAttribute("Create new book with valid data validate returned status and book details")]
         [NUnit.Framework.CategoryAttribute("mytag")]
         [NUnit.Framework.TestCaseAttribute("1", "AuthorWithTwentyNineLettersss", "Title 1", "Description 1 Test", "OK", null)]
         [NUnit.Framework.TestCaseAttribute("2", "AuthorWithThirtyLetterssssssss", "Title 2", "Description 2 Test", "OK", null)]
         [NUnit.Framework.TestCaseAttribute("3", "AuthorWithThirtyOneLetterssssss", "Title 3", "Description 3 Test", "BadRequest", null)]
         [NUnit.Framework.TestCaseAttribute("4", "Author with blank spaces", "Title 4", "Description 4 Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("5", "Author H. Writer", "Title 5", "Description 5 Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("6", "A.Symbols} @![\"#$%&\'()*+,-./]", "Title 6", "Description 6 Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("7", "Author", "TitleWithNinetyNineCharactersAsASingleWorkTitleWithNinetyNineCharactersAsASingleW" +
+        [NUnit.Framework.TestCaseAttribute("5", "A.{symbols} @![\"#$%&\'()*+,-./]", "Title 6", "Description 6 Test", "OK", null)]
+        [NUnit.Framework.TestCaseAttribute("6", "Author", "TitleWithNinetyNineCharactersAsASingleWorkTitleWithNinetyNineCharactersAsASingleW" +
             "orkTitleWithNinety", "Description 7 Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("8", "Author", "Title With a Hundred Characters Title With a Hundred Characters Title With a Hund" +
-            "red Charactersssss", "Description 8 Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("9", "Author", "Title With a Hundred and One Characters Title With a Hundred and One Characters T" +
+        [NUnit.Framework.TestCaseAttribute("7", "Author", "Title With a Hundred Characters Title With a Hundred Characters Title With a Hund" +
+            "red Characterssssss", "Description 8 Test", "OK", null)]
+        [NUnit.Framework.TestCaseAttribute("8", "Author", "Title With a Hundred and One Characters Title With a Hundred and One Characters T" +
             "itle With a Hundredd", "Description 9 Test", "BadRequest", null)]
-        [NUnit.Framework.TestCaseAttribute("10", "Author", "Title with {symbols} @!\"#$%&\'()*+,-./", "Description 10 Test", "OK", null)]
-        [NUnit.Framework.TestCaseAttribute("11", "Author", "TitleWithTwentyNice", @"Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 256 letters. Description with 255 letters. Description with 256 letters. Description with 256 letters. Description with6", "OK", null)]
-        public virtual void CreateNewBookAndValidateReturnedStatusAndBookDetails(string id, string author, string title, string description, string status, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("9", "Author", "Title with {symbols} @!\"#$%&\'()*+,-./", "Description 10 Test", "OK", null)]
+        [NUnit.Framework.TestCaseAttribute("10", "Author", "TitleWithTwentyNice", "Description with {256} letters. \\Descr\\iption with 256 [lette]rs. Des", "OK", null)]
+        public virtual void CreateNewBookWithValidDataValidateReturnedStatusAndBookDetails(string id, string author, string title, string description, string status, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -95,7 +94,7 @@ namespace Bede.Features
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new book and validate returned status and book details", null, @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new book with valid data validate returned status and book details", null, @__tags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -108,24 +107,76 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete a book and verify that it cannot be accessed")]
-        [NUnit.Framework.TestCaseAttribute("1", "Author 1", "Title 1", "Description 1", "NoContent", null)]
-        public virtual void DeleteABookAndVerifyThatItCannotBeAccessed(string id, string author, string title, string description, string status, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Create new book without an author")]
+        [NUnit.Framework.TestCaseAttribute("1", "", "Book Title", "Book Description", null)]
+        public virtual void CreateNewBookWithoutAnAuthor(string id, string author, string title, string description, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a book and verify that it cannot be accessed", null, exampleTags);
-#line 27
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new book without an author", null, exampleTags);
+#line 26
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 28
+#line 27
  testRunner.Given(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
+#line 28
+ testRunner.Then("system return an author is required error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create new book without a title")]
+        [NUnit.Framework.TestCaseAttribute("1", "Author H Oliver", "", "Book Description", null)]
+        public virtual void CreateNewBookWithoutATitle(string id, string author, string title, string description, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new book without a title", null, exampleTags);
+#line 35
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 36
+ testRunner.Given(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+ testRunner.Then("system return a title is required error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create new book without id")]
+        [NUnit.Framework.TestCaseAttribute("-1", "Author", "Title", "", null)]
+        [NUnit.Framework.TestCaseAttribute("0", "Author", "Title", "Description", null)]
+        public virtual void CreateNewBookWithoutId(string id, string author, string title, string description, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new book without id", null, exampleTags);
+#line 44
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 45
+ testRunner.Given(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 46
+ testRunner.Then("system return a id is required error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete a book and verify that it cannot be accessed")]
+        [NUnit.Framework.TestCaseAttribute("1", "Author 1", "Title 1", "Description 1", "NoContent", "NotFound", null)]
+        public virtual void DeleteABookAndVerifyThatItCannotBeAccessed(string id, string author, string title, string description, string status, string notFound, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a book and verify that it cannot be accessed", null, exampleTags);
+#line 54
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 55
+ testRunner.Given(string.Format("I create a new book with parameters - {0}, {1}, {2} and {3}", id, author, title, description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 56
  testRunner.When("I delete the created book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
+#line 57
  testRunner.Then(string.Format("system return a proper {0} with correct details of the book", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 31
+#line 58
  testRunner.When("I try to access the book by <id>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
- testRunner.Then("system return a proper \"NotFound\" status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 59
+ testRunner.Then(string.Format("system return a proper {0} status", notFound), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -135,16 +186,16 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateAndUpdateABook()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create and update a book", null, ((string[])(null)));
-#line 39
+#line 66
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 40
+#line 67
  testRunner.Given("I create a new book with parameters - 13, \"Author13\", \"Title13\" and \"Description1" +
                     "3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 41
+#line 68
     testRunner.When("I update the last created book with parameters - id 13, \"Updated Author\", \"This i" +
                     "s new title of the book.\" and \"Description of the UDPATED book.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
+#line 69
  testRunner.Then("the updated book details are coorect", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -155,7 +206,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void ReceiveListOfBooksMatchingTheSearchTermForTitle()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Receive list of books matching the search term for Title", null, ((string[])(null)));
-#line 45
+#line 72
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -204,12 +255,12 @@ this.ScenarioInitialize(scenarioInfo);
                         "Author J Oliver",
                         "$#!Test*&^%",
                         "Description"});
-#line 46
+#line 73
  testRunner.Given("I create books with params", ((string)(null)), table1, "Given ");
-#line 64
+#line 83
  testRunner.When("I search for a book \"Title\" with term \"Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 65
- testRunner.Then("the list of books from search result and registered books are the equal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 84
+ testRunner.Then("the list of books from search result and registered books are equal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -219,7 +270,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void ReceiveListOfBooksMatchingTheSearchTermForAuthor()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Receive list of books matching the search term for Author", null, ((string[])(null)));
-#line 68
+#line 87
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -248,12 +299,12 @@ this.ScenarioInitialize(scenarioInfo);
                         "$#!Test*&^% J Oliver",
                         "TitleOfTheTest",
                         "Description of Book    4"});
-#line 69
+#line 88
  testRunner.Given("I create books with params", ((string)(null)), table2, "Given ");
-#line 79
+#line 94
  testRunner.When("I search for a book \"Auhtor\" with term \"Author\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 80
- testRunner.Then("the list of books from search result and registered books are the equal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 95
+ testRunner.Then("the list of books from search result and registered books are equal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -263,7 +314,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void ReceiveListOfBooksMatchingTheSearchTermForDescription()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Receive list of books matching the search term for Description", null, ((string[])(null)));
-#line 83
+#line 98
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -292,12 +343,12 @@ this.ScenarioInitialize(scenarioInfo);
                         "Oliver",
                         "TitleOfTheTest",
                         "$$%!@StoryB#o*o&k of Book"});
-#line 84
+#line 99
  testRunner.Given("I create books with params", ((string)(null)), table3, "Given ");
-#line 94
+#line 105
  testRunner.When("I search for a book \"Description\" with term \"Story\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 95
- testRunner.Then("the list of books from search result and registered books are the equal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 106
+ testRunner.Then("the list of books from search result and registered books are equal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -307,7 +358,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void ReceiveEmptyListOfBooks_SearchWithDummyOrBlankTerm()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Receive empty list of books - search with dummy or blank term", null, ((string[])(null)));
-#line 98
+#line 109
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -331,31 +382,31 @@ this.ScenarioInitialize(scenarioInfo);
                         "Author J Oliver",
                         "Amazing Birds",
                         "Description of the novel"});
-#line 99
- testRunner.Given("I create books with params", ((string)(null)), table4, "Given ");
-#line 104
- testRunner.When("I search with not existing book \"Title\" with term \"None\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 105
- testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 106
- testRunner.When("I search for a book \"Title\" with term \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 107
- testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 108
- testRunner.When("I search for a book \"Author\" with term \"None\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 109
- testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 110
- testRunner.When("I search for a book \"Author\" with term \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 111
- testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 112
- testRunner.When("I search for a book \"Description\" with term \"None\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 113
- testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 114
- testRunner.When("I search for a book \"Description\" with term \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I create books with params", ((string)(null)), table4, "Given ");
 #line 115
+ testRunner.When("I search for not existing book \"Title\" with term \"None\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 116
+ testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 117
+ testRunner.When("I search for a book \"Title\" with term \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 118
+ testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 119
+ testRunner.When("I search for a book \"Author\" with term \"None\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 120
+ testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 121
+ testRunner.When("I search for a book \"Author\" with term \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 122
+ testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 123
+ testRunner.When("I search for a book \"Description\" with term \"None\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 124
+ testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 125
+ testRunner.When("I search for a book \"Description\" with term \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 126
  testRunner.Then("the list of books returned by the search result is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
